@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Back Button Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Kembali"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back" />
+
+        </LinearLayout>
+
+        <!-- Serene Mascot -->
+        <ImageView
+            android:id="@+id/ivMascotRecap"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="Mascot Serene"
+            android:src="@drawable/mascot_proud" />
+
+        <!-- Yellow Pill Badge -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_primary_3d"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:text="🌻 3 Hal Baik Hari Ini"
+            android:textColor="#1A1A1A"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Date Text -->
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Senin, 15 Juli 2026"
+            android:textColor="#8C8C8C"
+            android:textSize="13sp" />
+
+        <!-- Recycler View for 3 Gratitude Cards -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerGratitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:nestedScrollingEnabled="false" />
+
+        <!-- Total Count Badge -->
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Total Gratitude Tersimpan: 0 🌻"
+            android:textColor="#E68A00"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- See all link button -->
+        <TextView
+            android:id="@+id/tvSeeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/card_yellow_pastel"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="14dp"
+            android:text="📖 Lihat Semua Riwayat →"
+            android:textColor="#E68A00"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</ScrollView>

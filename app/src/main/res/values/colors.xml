@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#FFD60A</color>
+    <color name="primary_golden">#FFD60A</color>
+    <color name="button_shadow">#E0B800</color>
+    <color name="primary_dark">#F5C518</color>
+    <color name="accent">#F5A623</color>
+    <color name="amber_orange">#F5A623</color>
+    <color name="sunflower_yellow">#FFD60A</color>
+    <color name="soft_yellow">#FFF3B0</color>
+    <color name="background">#FFFDF0</color>
+    <color name="bg_cream_start">#FFFDF0</color>
+    <color name="bg_cream_end">#FFF5C0</color>
+    <color name="bg_pale_yellow">#FFFDF0</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="card_border">#FFEAA7</color>
+    <color name="yellow_border">#FFEAA7</color>
+    <color name="bot_bubble_bg">#FFFFFF</color>
+    <color name="text_dark">#1A1A1A</color>
+    <color name="text_subdued">#666666</color>
+    <color name="text_muted">#8C8C8C</color>
+    <color name="text_gold">#E68A00</color>
+    <color name="night_purple_bg">#F3F0FF</color>
+    <color name="night_purple_btn">#6C5CE7</color>
+</resources>

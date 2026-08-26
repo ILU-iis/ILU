@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ILU Monitoring & Database Portal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js CDN for Developer Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Firebase Compat SDKs (Supports Direct local file:// opening) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================== -->
+  <!-- 1. WELCOME LANDING PAGE                                    -->
+  <!-- ========================================================== -->
+  <div id="welcomeView" class="page-section">
+    <div class="welcome-container">
+      <div class="sunflower-deco top-left">🌻</div>
+      <div class="sunflower-deco bottom-right">🌻</div>
+
+      <div class="welcome-badge">
+        <div class="sunflower-hero">🌻</div>
+        <h1>Selamat Datang di ILU Dashboard</h1>
+        <p class="welcome-subtitle">Portal Pemantauan Data Terpadu & Terapi Psikologis Aplikasi ILU</p>
+      </div>
+
+      <p class="welcome-description">
+        Sistem monitoring terpusat untuk memantau percakapan harian, peringatan dini krisis psikologis, dan terapi refleksi 3 hal baik bagi mitra rumah sakit dan tim pengembang.
+      </p>
+
+      <button class="btn-primary-lg" onclick="navToRoleSelect()">
+        Masuk ke Portal <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ========================================================== -->
+  <!-- 2. ROLE SELECTION PAGE                                     -->
+  <!-- ========================================================== -->
+  <div id="roleSelectView" class="page-section hidden">
+    <div class="role-card-container">
+      <button class="btn-back-link" onclick="navToWelcome()">
+        <i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama
+      </button>
+
+      <div class="brand-badge">
+        <div class="brand-icon">🌻</div>
+        <h1>Pilih Peran Akses</h1>
+        <p class="brand-subtitle">Silakan pilih jenis akun untuk melanjutkan ke halaman login</p>
+      </div>
+
+      <div class="role-grid">
+        <!-- Role Rumah Sakit -->
+        <div class="role-option-card" onclick="navToLogin('hospital')">
+          <div class="role-icon-wrapper hospital-bg">
+            <i class="fa-solid fa-hospital-user"></i>
+          </div>
+          <h3>Pihak Rumah Sakit / Klinik</h3>
+          <p>Akses data percakapan pengguna, log peringatan krisis, dan terapi gratitude untuk tindak lanjut klinis.</p>
+          <button class="btn-role btn-hospital">Masuk sebagai Rumah Sakit <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- Role Developer -->
+        <div class="role-option-card" onclick="navToLogin('developer')">
+          <div class="role-icon-wrapper dev-bg">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h3>Tim Developer</h3>
+          <p>Akses penuh mencakup statistik penggunaan harian, pemantauan error/bug, dan manajemen akun pengguna portal.</p>
+          <button class="btn-role btn-developer">Masuk sebagai Developer <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================== -->
+  <!-- 3. LOGIN PAGE                                              -->
+  <!-- ========================================================== -->
+  <div id="loginView" class="page-section hidden">
+    <div class="login-card">
+      <button class="btn-back-link" onclick="navToRoleSelect()">
+        <i class="fa-solid fa-arrow-left"></i> Ganti Peran
+      </button>
+
+      <div class="login-header">
+        <div class="sunflower-icon-sm">🌻</div>
+        <h2 id="loginTitle">Login Portal</h2>
+        <p id="loginSubtitle">Masukkan Username dan Password Anda</p>
+      </div>
+
+      <!-- Error Alert Box -->
+      <div id="loginErrorAlert" class="error-alert hidden">
+        <i class="fa-solid fa-circle-xmark"></i>
+        <span id="loginErrorMsg">Username atau Password salah. Silakan coba lagi.</span>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+        <div class="form-group">
+          <label for="inputUsername"><i class="fa-solid fa-user"></i> Username</label>
+          <input type="text" id="inputUsername" placeholder="Masukkan Username..." required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword"><i class="fa-solid fa-key"></i> Password</label>
+          <input type="password" id="inputPassword" placeholder="Masukkan Password..." required>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Masuk Sekarang <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================== -->
+  <!-- 4. MAIN DASHBOARD APPLICATION                               -->
+  <!-- ========================================================== -->
+  <div id="appContainer" class="app-container hidden">
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-brand" onclick="navToUserList()">
+        <div class="logo">🌻</div>
+        <div class="brand-text">
+          <span class="app-name">ILU Dashboard</span>
+          <span class="app-tag">Portal Database</span>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <!-- Logged-In User Name -->
+        <span id="loggedInUserDisplay" class="logged-in-user">
+          <i class="fa-solid fa-user-circle"></i> <span id="currentUsernameText">User</span>
+        </span>
+
+        <!-- Active Role Badge -->
+        <div id="roleBadge" class="badge-role hospital">
+          <i id="roleBadgeIcon" class="fa-solid fa-hospital-user"></i>
+          <span id="roleBadgeText">Rumah Sakit</span>
+        </div>
+
+        <button class="btn-logout" onclick="handleLogout()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- ====================================================== -->
+      <!-- VIEW A: USER LIST & OVERVIEW                           -->
+      <!-- ====================================================== -->
+      <section id="userListView" class="dashboard-section">
+
+        <!-- Developer-Only Stats Panel -->
+        <div id="devStatsPanel" class="dev-stats-panel hidden">
+          <div class="section-title-row">
+            <h2><i class="fa-solid fa-chart-column"></i> Panel Statistik Developer</h2>
+            <span class="update-time"><i class="fa-solid fa-rotate"></i> Real-time Sync</span>
+          </div>
+
+          <!-- Summary Metric Cards -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon chat-color"><i class="fa-solid fa-comments"></i></div>
+              <div class="metric-info">
+                <span class="metric-value" id="statTotalChats">0</span>
+                <span class="metric-label">Total Pesan Chat</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon user-color"><i class="fa-solid fa-users"></i></div>
+              <div class="metric-info">
+                <span class="metric-value" id="statTotalUsers">0</span>
+                <span class="metric-label">Total Pengguna</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon warning-color"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div class="metric-info">
+                <span class="metric-value" id="statTotalWarnings">0</span>
+                <span class="metric-label">Kasus Krisis Terdeteksi</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon gratitude-color"><i class="fa-solid fa-heart"></i></div>
+              <div class="metric-info">
+                <span class="metric-value" id="statTotalGratitudes">0</span>
+                <span class="metric-label">Total Gratitude Diisi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart & Error Notifications Row -->
+          <div class="dev-charts-row">
+            <div class="chart-container-card">
+              <h3><i class="fa-solid fa-chart-line"></i> Grafik Aktivitas Chat per Hari</h3>
+              <canvas id="dailyChatChart" height="200"></canvas>
+            </div>
+
+            <div class="error-notifications-card">
+              <h3><i class="fa-solid fa-bug"></i> Pemantauan Error & Anomali Sistem</h3>
+              <div id="errorNotificationsList" class="error-list">
+                <!-- Dynamic Error Items -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Developer-Only Account Management Panel -->
+        <div id="accountManagementPanel" class="dev-stats-panel hidden" style="border-color: #F5C518; margin-bottom: 32px;">
+          <div class="section-title-row">
+            <h2><i class="fa-solid fa-user-gear"></i> Manajemen Akun Login (Developer & Rumah Sakit)</h2>
+            <button class="btn-primary-sm" onclick="openAddAccountModal()">
+              <i class="fa-solid fa-plus"></i> Tambah Akun Baru
+            </button>
+          </div>
+          <p class="section-sub" style="margin-bottom: 16px;">Kelola akun username & password yang berhak mengakses Portal Database ILU.</p>
+
+          <div id="accountsTableContainer" class="accounts-table-container">
+            <table class="accounts-table">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th>Peran Akses (Role)</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="accountsTbody">
+                <!-- Dynamic Accounts -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- User Search & Filter Header -->
+        <div class="section-title-row">
+          <div>
+            <h2><i class="fa-solid fa-users"></i> Daftar Pengguna Aplikasi ILU</h2>
+            <p class="section-sub">Pilih salah satu pengguna untuk melihat detail database (Chat, Warning, dan Gratitude).</p>
+          </div>
+
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="userSearchInput" placeholder="Cari nama pengguna..." onkeyup="filterUsers()">
+          </div>
+        </div>
+
+        <!-- Users Grid -->
+        <div id="usersGrid" class="users-grid">
+          <div class="loading-spinner">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Memuat data pengguna dari Firebase...</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ====================================================== -->
+      <!-- VIEW B: USER DETAIL (3 TABS)                           -->
+      <!-- ====================================================== -->
+      <section id="userDetailView" class="dashboard-section hidden">
+
+        <!-- Back Button & User Profile Header -->
+        <div class="detail-header-card">
+          <button class="btn-back" onclick="navToUserList()">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar User
+          </button>
+
+          <div class="user-profile-bar">
+            <div class="user-avatar" id="detailUserAvatar">T</div>
+            <div class="user-details">
+              <h2 id="detailUserName">Nama User</h2>
+              <p id="detailUserSub">Aktivitas Terakhir: -</p>
+            </div>
+
+            <!-- Delete User Database Button (Developer Only) -->
+            <button id="btnDeleteUserDb" class="btn-delete-user hidden" onclick="confirmDeleteUserDatabase()">
+              <i class="fa-solid fa-trash-can"></i> Hapus Seluruh Data Pengguna
+            </button>
+
+            <div class="user-stats-summary">
+              <div class="mini-stat">
+                <span class="stat-num" id="detailChatCount">0</span>
+                <span class="stat-lbl">Chat</span>
+              </div>
+              <div class="mini-stat warning-stat">
+                <span class="stat-num" id="detailWarningCount">0</span>
+                <span class="stat-lbl">Warning</span>
+              </div>
+              <div class="mini-stat gratitude-stat">
+                <span class="stat-num" id="detailGratitudeCount">0</span>
+                <span class="stat-lbl">Gratitude</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Period 15-Day Filter Bar -->
+          <div class="tab-filter-bar" style="margin-bottom: 16px; background: #FFFDF5; padding: 10px 14px; border-radius: 8px; border: 1px solid #FFE58F;">
+            <label for="userPeriodFilter" style="font-weight: 600; color: #B45309;"><i class="fa-solid fa-clock-rotate-left"></i> Siklus Periode 15 Hari:</label>
+            <select id="userPeriodFilter" onchange="onPeriodFilterChanged()" style="border-color: #F5C518; font-weight: 500;">
+              <option value="all">Semua Periode (Gabungan)</option>
+            </select>
+          </div>
+
+          <!-- Navigation Tabs -->
+          <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('chatTab')">
+              <i class="fa-solid fa-comments"></i> Chat Activity
+            </button>
+            <button class="tab-btn" onclick="switchTab('warningTab')">
+              <i class="fa-solid fa-triangle-exclamation"></i> Warning (Krisis)
+              <span id="warningTabBadge" class="tab-badge hidden">0</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('gratitudeTab')">
+              <i class="fa-solid fa-heart"></i> Gratitude Therapy
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT 1: CHAT ACTIVITY -->
+        <div id="chatTab" class="tab-content active">
+          <div class="tab-filter-bar">
+            <label for="chatDateFilter"><i class="fa-solid fa-calendar-days"></i> Pilih Tanggal:</label>
+            <select id="chatDateFilter" onchange="renderUserChats()">
+              <option value="all">Semua Tanggal</option>
+            </select>
+          </div>
+
+          <div id="chatMessagesContainer" class="chat-container">
+            <!-- Dynamic Chat Messages -->
+          </div>
+        </div>
+
+        <!-- TAB CONTENT 2: WARNING / KRISIS -->
+        <div id="warningTab" class="tab-content">
+          <div class="warning-banner">
+            <i class="fa-solid fa-shield-cat"></i>
+            <div>
+              <h4>Pencatatan Lapisan Deteksi Krisis</h4>
+              <p>Daftar kejadian saat pengguna menyebutkan frasa sensitif (self-harm / krisis) yang memicu pesan rujukan psikiater.</p>
+            </div>
+          </div>
+
+          <div id="warningListContainer" class="warning-list">
+            <!-- Dynamic Warning Cards -->
+          </div>
+        </div>
+
+        <!-- TAB CONTENT 3: GRATITUDE THERAPY -->
+        <div id="gratitudeTab" class="tab-content">
+          <div class="gratitude-banner">
+            <i class="fa-solid fa-seedling"></i>
+            <div>
+              <h4>Rangkuman Terapi 3 Hal Baik</h4>
+              <p>Daftar hal-hal positif yang ditulis pengguna secara harian dari sesi refleksi percakapan ILU.</p>
+            </div>
+          </div>
+
+          <div id="gratitudeListContainer" class="gratitude-grid">
+            <!-- Dynamic Gratitude Cards -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- ========================================================== -->
+  <!-- 5. ACCOUNT ADD/EDIT MODAL (DEVELOPER ONLY)                 -->
+  <!-- ========================================================== -->
+  <div id="accountModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="accountModalTitle">Tambah Akun Baru</h3>
+        <button class="btn-close-modal" onclick="closeAccountModal()">&times;</button>
+      </div>
+      <form id="accountForm" onsubmit="handleAccountFormSubmit(event)">
+        <input type="hidden" id="editAccountId" value="">
+
+        <div class="form-group">
+          <label for="accUsername">Username</label>
+          <input type="text" id="accUsername" placeholder="Contoh: RSUD Sayyidiman Magetan" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="accPassword">Password</label>
+          <input type="text" id="accPassword" placeholder="Password akun..." required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="accRole">Peran Akses (Role)</label>
+          <select id="accRole" required>
+            <option value="hospital">Rumah Sakit / Klinik</option>
+            <option value="developer">Tim Developer</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeAccountModal()">Batal</button>
+          <button type="submit" class="btn-primary-sm">Simpan Akun</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Standard JavaScript Script (Compatible with file:// protocol) -->
+  <script src="app.js"></script>
+
+</body>
+</html>

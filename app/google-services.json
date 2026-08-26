@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "548843396145",
+    "project_id": "ilu-app-2d650",
+    "storage_bucket": "ilu-app-2d650.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548843396145:android:543c53aef7c2356742c910",
+        "android_client_info": {
+          "package_name": "com.example.ilu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2vtJlJ4gv5qbhM_HMf_XDBqR1IP3IUmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,74 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <group>
+        
+        <!-- Back Petals (6 Petals) - Amber Gold #F5A623 -->
+        <group android:rotation="15" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#F5A623" android:strokeColor="#4A3000" android:strokeWidth="1.2" />
+        </group>
+        <group android:rotation="75" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#F5A623" android:strokeColor="#4A3000" android:strokeWidth="1.2" />
+        </group>
+        <group android:rotation="135" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#F5A623" android:strokeColor="#4A3000" android:strokeWidth="1.2" />
+        </group>
+        <group android:rotation="195" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#F5A623" android:strokeColor="#4A3000" android:strokeWidth="1.2" />
+        </group>
+        <group android:rotation="255" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#F5A623" android:strokeColor="#4A3000" android:strokeWidth="1.2" />
+        </group>
+        <group android:rotation="315" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#F5A623" android:strokeColor="#4A3000" android:strokeWidth="1.2" />
+        </group>
+
+        <!-- Front Petals (6 Petals) - Bright Sunflower Yellow #FFD60A -->
+        <group android:rotation="45" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#FFD60A" android:strokeColor="#4A3000" android:strokeWidth="1.4" />
+        </group>
+        <group android:rotation="105" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#FFD60A" android:strokeColor="#4A3000" android:strokeWidth="1.4" />
+        </group>
+        <group android:rotation="165" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#FFD60A" android:strokeColor="#4A3000" android:strokeWidth="1.4" />
+        </group>
+        <group android:rotation="225" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#FFD60A" android:strokeColor="#4A3000" android:strokeWidth="1.4" />
+        </group>
+        <group android:rotation="285" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#FFD60A" android:strokeColor="#4A3000" android:strokeWidth="1.4" />
+        </group>
+        <group android:rotation="345" android:pivotX="100" android:pivotY="100">
+            <path android:pathData="M100,59 C74,55 66,28 82,10 Q100,2 118,10 C134,28 126,55 100,59 Z" android:fillColor="#FFD60A" android:strokeColor="#4A3000" android:strokeWidth="1.4" />
+        </group>
+
+        <!-- Face Circle - Soft Warm Yellow #FFF3B0 -->
+        <path
+            android:pathData="M100,100 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"
+            android:fillColor="#FFF3B0"
+            android:strokeColor="#4A3000"
+            android:strokeWidth="1.6" />
+
+        <!-- Rosy Blush Cheeks - Soft Pink #FFB3BA -->
+        <path
+            android:pathData="M76,113 m-14,0 a14,10 0 1,1 28,0 a14,10 0 1,1 -28,0"
+            android:fillColor="#FFB3BA" />
+        <path
+            android:pathData="M124,113 m-14,0 a14,10 0 1,1 28,0 a14,10 0 1,1 -28,0"
+            android:fillColor="#FFB3BA" />
+
+        <!-- Eyes: Energetic -->
+        <path android:pathData="M87,97 m-7.5,0 a7.5,9 0 1,1 15,0 a7.5,9 0 1,1 -15,0" android:fillColor="#3D2000" />
+        <path android:pathData="M113,97 m-7.5,0 a7.5,9 0 1,1 15,0 a7.5,9 0 1,1 -15,0" android:fillColor="#3D2000" />
+        <path android:pathData="M90,94 m-2.8,0 a2.8,2.8 0 1,1 5.6,0 a2.8,2.8 0 1,1 -5.6,0" android:fillColor="#FFFFFF" />
+        <path android:pathData="M116,94 m-2.8,0 a2.8,2.8 0 1,1 5.6,0 a2.8,2.8 0 1,1 -5.6,0" android:fillColor="#FFFFFF" />
+        <path android:pathData="M80,79 Q87,72 94,79" android:strokeColor="#3D2000" android:strokeWidth="2.2" android:strokeLineCap="round" />
+        <path android:pathData="M106,79 Q113,72 120,79" android:strokeColor="#3D2000" android:strokeWidth="2.2" android:strokeLineCap="round" />
+        <!-- Mouth: Energetic -->
+        <path android:pathData="M86,119 Q100,139 114,119 Z" android:fillColor="#F07888" android:strokeColor="#3D2000" android:strokeWidth="2.8" android:strokeLineCap="round" />
+    </group>
+</vector>
