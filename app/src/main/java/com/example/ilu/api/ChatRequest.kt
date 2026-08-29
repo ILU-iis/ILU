@@ -7,7 +7,10 @@ data class ChatRequest(
     val model: String,
 
     @SerializedName("messages")
-    val messages: List<ChatMessage>
+    val messages: List<ChatMessage>,
+
+    @SerializedName("max_tokens")
+    val maxTokens: Int = 200
 )
 
 data class ChatMessage(

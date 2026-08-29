@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi Aplikasi ILU</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; color: #333; background-color: #f9f9f9; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #d4af37; border-bottom: 2px solid #f1f1f1; padding-bottom: 10px; }
+        h2 { color: #555; margin-top: 25px; }
+        p, li { font-size: 14px; text-align: justify; }
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kebijakan Privasi Aplikasi ILU (I Listen to You)</h1>
+        <p>Terakhir Diperbarui: 29 Agustus 2026</p>
+        
+        <p>Aplikasi ILU (I Listen to You) dikembangkan oleh Rahma dari SMA Islamic International School PSM Magetan. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi pengguna saat menggunakan aplikasi mobile ILU.</p>
+        
+        <h2>1. Informasi yang Kami Kumpulkan</h2>
+        <p>Untuk mendukung fungsionalitas pendamping emosional dan pemantauan klinis, aplikasi kami mengumpulkan beberapa data berikut:</p>
+        <ul>
+            <li><strong>Nama Panggilan:</strong> Disimpan secara lokal di perangkat Anda (menggunakan SharedPreferences) untuk kebutuhan personalisasi sapaan oleh AI pendamping.</li>
+            <li><strong>Riwayat Percakapan (Chat Logs):</strong> Isi obrolan Anda dengan AI disimpan di database lokal perangkat Anda dan disinkronkan ke Firebase Firestore.</li>
+            <li><strong>Data Terapi Gratitude:</strong> Catatan tiga hal baik harian yang Anda tuliskan disimpan secara terstruktur di database Firebase Firestore.</li>
+            <li><strong>Log Deteksi Krisis:</strong> Apabila sistem mendeteksi kata kunci sensitif terkait kondisi krisis psikologis (self-harm), sistem akan mencatat waktu kejadian dan kata kunci pemicu tersebut ke dalam basis data Firebase Firestore.</li>
+        </ul>
+
+        <h2>2. Penggunaan Informasi</h2>
+        <p>Data yang dikumpulkan digunakan semata-mata untuk tujuan berikut:</p>
+        <ul>
+            <li>Menyediakan layanan chat interaktif berbasis kecerdasan buatan (menggunakan model GPT-5.6 Luna melalui API OpenRouter).</li>
+            <li>Memfasilitasi terapi psikologi positif (Gratitude Therapy).</li>
+            <li>Memberikan akses kepada pihak rumah sakit berwenang untuk memantau kondisi perkembangan emosional pengguna secara real-time guna penanganan medis lebih lanjut jika terjadi kondisi krisis darurat.</li>
+        </ul>
+
+        <h2>3. Keamanan Data</h2>
+        <p>Kami sangat berkomitmen untuk menjaga keamanan data pribadi Anda. Data obrolan dan log krisis Anda disimpan di server cloud Firebase Firestore yang dilindungi enkripsi standar industri Google. Data tersebut tidak akan dibagikan kepada pihak ketiga di luar tim medis rumah sakit pemantau dan tim pengembang aplikasi.</p>
+
+        <h2>4. Penghapusan Data</h2>
+        <p>Pengguna memiliki hak penuh untuk meminta penghapusan seluruh data percakapan mereka dari server database kami. Penghapusan data dapat diajukan melalui tim pengembang atau akan dilakukan secara otomatis oleh Administrator Developer jika masa program pemantauan selesai.</p>
+
+        <h2>5. Kontak Kami</h2>
+        <p>Apabila Anda memiliki pertanyaan mengenai kebijakan privasi ini atau ingin mengajukan penghapusan data, Anda dapat menghubungi kami melalui:</p>
+        <p>Email: <strong>rahmasmaiis@gmail.com</strong><br>Institusi: SMA Islamic International School PSM Magetan</p>
+    </div>
+</body>
+</html>

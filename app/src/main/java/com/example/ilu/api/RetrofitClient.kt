@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     private const val BASE_URL =
-        "https://api.openai.com/v1/"
+        "https://openrouter.ai/api/v1/"
 
     private val logging =
         HttpLoggingInterceptor().apply {

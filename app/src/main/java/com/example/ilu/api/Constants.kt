@@ -2,9 +2,9 @@ package com.example.ilu.api
 
 object Constants {
 
-    const val API_KEY = "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"
+    const val API_KEY = "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"
 
-    const val MODEL = "gpt-5.6-luna"
+    const val MODEL = "openai/gpt-5.6-luna"
 
     const val SYSTEM_PROMPT = """
 Kamu adalah ILU (I Listen to You), AI pendamping kesehatan mental yang hadir sebagai sahabat dekat yang sangat hangat, peka, dan siap mendengarkan cerita pengguna setiap hari.

@@ -23,9 +23,19 @@ android {
 
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:/Users/Rahma/Documents/opsi/ilu_release_key.jks")
+            storePassword = "ilupassword123"
+            keyAlias = "ilukey"
+            keyPassword = "ilupassword123"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
