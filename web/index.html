@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILU — I Listen to You | A Gentle Space to Listen, Reflect & Appreciate</title>
+    <meta name="description" content="Meet ILU — I Listen to You, a digital wellbeing companion designed to help you pause, reflect, and practice gratitude through Three Good Things.">
+    <meta name="keywords" content="ILU, I Listen to You, mental health app, gratitude app, three good things, aplikasi kesehatan mental, aplikasi gratitude">
+    <meta property="og:title" content="ILU — I Listen to You">
+    <meta property="og:description" content="A digital wellbeing companion designed to help you pause, reflect, and appreciate the little things.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --cream: #FFF9E8;
+            --soft-yellow: #FFEFA8;
+            --warm-yellow: #FFD95A;
+            --sunflower: #F6C945;
+            --text-dark: #3F3A2F;
+            --text-secondary: #777267;
+            --text-light: #A09880;
+            --shadow: rgba(246, 201, 69, 0.15);
+            --shadow-hover: rgba(246, 201, 69, 0.3);
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            outline: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Reusable Components */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--warm-yellow);
+            color: var(--text-dark);
+            box-shadow: 0 4px 14px var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--warm-yellow);
+            color: var(--text-dark);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--soft-yellow);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* SVG Mascot Animation */
+        .mascot-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section 1: Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--white);
+            transition: all var(--transition);
+            padding: 20px 0;
+        }
+
+        .navbar.scrolled {
+            padding: 12px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .nav-logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--sunflower);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--white);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Section 2: Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 40px;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--sunflower);
+            margin-bottom: 24px;
+        }
+
+        .hero-desc {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-mascot {
+            width: 250px;
+            height: 250px;
+        }
+
+        .floating-deco {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.5;
+            animation: float 4s ease-in-out infinite alternate;
+        }
+        .deco-1 { top: 20%; left: 5%; animation-delay: 0s; }
+        .deco-2 { top: 15%; right: 10%; width: 30px; height: 30px; animation-delay: 1s; }
+        .deco-3 { bottom: 20%; left: 45%; width: 25px; height: 25px; animation-delay: 2s; }
+        .deco-4 { bottom: 15%; right: 5%; animation-delay: 1.5s; }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 2s ease-in-out infinite;
+            color: var(--text-light);
+            font-size: 24px;
+        }
+
+        /* Section 3: Download */
+        .download-section {
+            background-color: var(--cream);
+            text-align: center;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            border: 12px solid var(--text-dark);
+            border-radius: 40px;
+            margin: 40px auto;
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 24px;
+            background-color: var(--text-dark);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+        }
+
+        .chat-ui {
+            padding: 50px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            max-width: 85%;
+        }
+
+        .chat-bubble.ilu {
+            background-color: var(--soft-yellow);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-bubble.user {
+            background-color: #f0f0f0;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Section 4: What is ILU */
+        .what-is-ilu {
+            background-color: var(--white);
+        }
+
+        .highlight-phrase {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--sunflower);
+            text-align: center;
+            margin: 40px 0;
+            font-style: italic;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background-color: var(--white);
+            border: 2px solid var(--soft-yellow);
+            border-radius: 24px;
+            padding: 32px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px var(--shadow-hover);
+            border-color: var(--sunflower);
+        }
+
+        .info-card-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            background-color: var(--cream);
+            border-radius: 50%;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        /* Section 5: Why ILU Exists */
+        .why-ilu {
+            background-color: var(--cream);
+            text-align: center;
+        }
+
+        .why-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .abstract-illustration {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .abstract-illustration svg {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Section 6: Three Good Things */
+        .three-good-things {
+            background-color: var(--white);
+        }
+
+        .tgt-demo {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--cream);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .tgt-card {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--warm-yellow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .tgt-card:hover {
+            transform: translateX(4px);
+        }
+
+        .tgt-card:hover .tgt-icon {
+            transform: rotate(10deg);
+        }
+
+        .tgt-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .tgt-input-wrapper {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tgt-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--soft-yellow);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .tgt-input:focus {
+            border-color: var(--sunflower);
+        }
+
+        .tgt-success {
+            display: none;
+            text-align: center;
+            margin-top: 24px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section 7: Education / Understand */
+        .understand {
+            background-color: var(--cream);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background-color: var(--white);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--sunflower);
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 24px;
+            color: var(--text-secondary);
+        }
+
+        .accordion-item.active .accordion-content {
+            padding-bottom: 24px;
+        }
+
+        /* Section 8: Stats */
+        .stats {
+            background-color: var(--white);
+            background-image: radial-gradient(var(--cream) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            padding: 40px 32px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid var(--cream);
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--sunflower);
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .stat-desc {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .stat-source {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Section 9: How it Works */
+        .how-it-works {
+            background-color: var(--cream);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            width: 2px;
+            background-color: var(--soft-yellow);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 64px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            background-color: var(--white);
+            border: 2px solid var(--sunflower);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .timeline-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        /* Section 10: Features */
+        .features {
+            background-color: var(--white);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border: 2px solid var(--cream);
+            border-radius: 20px;
+            padding: 32px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px var(--shadow);
+            border-color: var(--sunflower);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        /* Section 11: Safety Notice */
+        .safety-notice {
+            background-color: #FFFDF8;
+            padding: 60px 0;
+            border-left: 8px solid var(--sunflower);
+        }
+
+        .safety-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .safety-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        /* Section 12: Journey / Resources */
+        .journey {
+            background-color: var(--white);
+        }
+
+        .journey-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .journey-item {
+            background-color: var(--cream);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .journey-item:hover {
+            background-color: var(--soft-yellow);
+        }
+
+        .journey-header {
+            font-weight: 600;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .journey-desc {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, margin 0.3s;
+            color: var(--text-secondary);
+        }
+
+        .journey-item.open .journey-desc {
+            margin-top: 12px;
+        }
+
+        /* Section 13: FAQ */
+        .faq {
+            background-color: var(--cream);
+        }
+
+        /* Section 14: Final CTA */
+        .final-cta {
+            background-color: var(--warm-yellow);
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .final-cta .btn {
+            background-color: var(--white);
+            color: var(--text-dark);
+            font-size: 1.125rem;
+            padding: 16px 40px;
+        }
+
+        .final-cta .btn:hover {
+            background-color: var(--text-dark);
+            color: var(--white);
+        }
+
+        .final-mascot {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+
+        /* Section 15: Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--cream);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .footer-nav a:hover {
+            color: var(--sunflower);
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--cream);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3rem; }
+            .hero-mascot { width: 200px; height: 200px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; text-align: center; }
+            .footer-nav { justify-content: flex-start; }
+            .footer-right { text-align: left; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 60px 0; }
+            .nav-links, .nav-right .btn { display: none; }
+            .hamburger { display: flex; }
+            
+            .hero-container { flex-direction: column-reverse; text-align: center; }
+            .hero-actions { justify-content: center; }
+            .hero-title { font-size: 2.5rem; }
+            
+            .timeline::before { left: 16px; }
+            .timeline-item { padding-left: 48px; }
+            .timeline-icon { width: 32px; height: 32px; }
+            .timeline-icon svg { width: 16px; height: 16px; }
+            
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-nav { justify-content: center; }
+            .footer-brand, .footer-right { align-items: center; text-align: center; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- SVG Sprites -->
+    <svg style="display: none;">
+        <!-- Sunflower Mascot - exact ILU mascot design -->
+        <symbol id="sunflower-mascot" viewBox="0 0 200 200">
+            <g class="mascot-group">
+                <!-- Orange petals (back layer) -->
+                <circle cx="100" cy="34"  r="32" fill="#F5A623" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="152" cy="67"  r="32" fill="#F5A623" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="152" cy="133" r="32" fill="#F5A623" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="100" cy="166" r="32" fill="#F5A623" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="48"  cy="133" r="32" fill="#F5A623" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="48"  cy="67"  r="32" fill="#F5A623" stroke="#3D2000" stroke-width="3"/>
+                <!-- Yellow petals (front layer) -->
+                <circle cx="130" cy="45"  r="32" fill="#FFD60A" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="160" cy="100" r="32" fill="#FFD60A" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="130" cy="155" r="32" fill="#FFD60A" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="70"  cy="155" r="32" fill="#FFD60A" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="40"  cy="100" r="32" fill="#FFD60A" stroke="#3D2000" stroke-width="3"/>
+                <circle cx="70"  cy="45"  r="32" fill="#FFD60A" stroke="#3D2000" stroke-width="3"/>
+                <!-- Center face circle -->
+                <circle cx="100" cy="100" r="52" fill="#FFFCE6" stroke="#3D2000" stroke-width="3"/>
+                <!-- Pink cheeks -->
+                <ellipse cx="76"  cy="112" rx="14" ry="9" fill="#FFB3BA" opacity="0.9"/>
+                <ellipse cx="124" cy="112" rx="14" ry="9" fill="#FFB3BA" opacity="0.9"/>
+                <!-- Eyes (large round dots with white highlights) -->
+                <circle cx="86"  cy="94" r="9" fill="#2D1A00"/>
+                <circle cx="114" cy="94" r="9" fill="#2D1A00"/>
+                <circle cx="82"  cy="90" r="3" fill="white"/>
+                <circle cx="110" cy="90" r="3" fill="white"/>
+                <!-- Eyebrows -->
+                <path d="M78,81 Q86,76 94,81"   fill="none" stroke="#2D1A00" stroke-width="3" stroke-linecap="round"/>
+                <path d="M106,81 Q114,76 122,81" fill="none" stroke="#2D1A00" stroke-width="3" stroke-linecap="round"/>
+                <!-- Open happy mouth with teeth -->
+                <path d="M86,115 Q100,130 114,115 Q107,124 100,125 Q93,124 86,115Z" fill="#2D1A00"/>
+                <path d="M88,117 Q100,127 112,117 Q107,122 100,123 Q93,122 88,117Z" fill="white"/>
+            </g>
+        </symbol>
+
+        <symbol id="icon-plus" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+        </symbol>
+    </svg>
+
+    <!-- SECTION 1: STICKY NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <svg><use href="#sunflower-mascot"></use></svg>
+                ILU
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#what-is-ilu">What is ILU?</a></li>
+                <li><a href="#understand">Understand</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="#download" class="btn btn-primary">Download ILU</a>
+                <button class="hamburger" id="hamburger-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="close-menu" id="close-menu">&times;</button>
+        <a href="#" class="mobile-link">Home</a>
+        <a href="#what-is-ilu" class="mobile-link">What is ILU?</a>
+        <a href="#understand" class="mobile-link">Understand</a>
+        <a href="#how-it-works" class="mobile-link">How It Works</a>
+        <a href="#resources" class="mobile-link">Resources</a>
+        <a href="#download" class="btn btn-primary mobile-link" style="margin-top: 20px;">Download ILU</a>
+    </div>
+
+    <!-- SECTION 2: HERO -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content animate-on-scroll">
+                <h1 class="hero-title">Welcome to ILU</h1>
+                <h2 class="hero-subtitle">I Listen to You</h2>
+                <p class="hero-desc">Sometimes, you don't need all the answers. You just need a space that listens.</p>
+                <div class="hero-actions">
+                    <a href="#download" class="btn btn-primary">Get ILU</a>
+                    <a href="#what-is-ilu" class="btn btn-outline">Get to Know ILU</a>
+                </div>
+                <p class="hero-note">Your feelings deserve a place to be heard.</p>
+            </div>
+            <div class="hero-visual animate-on-scroll" style="transition-delay: 0.2s">
+                <svg class="hero-mascot mascot-float"><use href="#sunflower-mascot"></use></svg>
+            </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <svg class="floating-deco deco-1"><use href="#sunflower-mascot"></use></svg>
+        <svg class="floating-deco deco-2"><use href="#sunflower-mascot"></use></svg>
+        <svg class="floating-deco deco-3"><use href="#sunflower-mascot"></use></svg>
+        <svg class="floating-deco deco-4"><use href="#sunflower-mascot"></use></svg>
+
+        <div class="scroll-indicator">
+            ↓
+        </div>
+    </section>
+
+    <!-- SECTION 3: DOWNLOAD SECTION -->
+    <section id="download" class="download-section">
+        <div class="container animate-on-scroll">
+            <h2 class="section-title">Your little space to pause, reflect, and listen.</h2>
+            <p class="section-subtitle" style="margin-bottom: 32px;">ILU is an Android application available on Google Play.</p>
+            
+            <a href="#" class="btn btn-primary" style="font-size: 1.25rem; padding: 16px 40px; margin-bottom: 16px;">Download ILU</a>
+            <br>
+            <a href="#what-is-ilu" style="color: var(--text-secondary); text-decoration: underline;">Explore ILU first</a>
+            
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="chat-ui">
+                    <div class="chat-bubble ilu">Hello! I'm ILU. How are you feeling today? 🌻</div>
+                    <div class="chat-bubble user">I'm feeling a bit overwhelmed, honestly.</div>
+                    <div class="chat-bubble ilu">I hear you. It's completely okay to feel overwhelmed sometimes. I'm here to listen. Would you like to write down three good things that happened today to help ground yourself?</div>
+                </div>
+            </div>
+            
+            <p class="hero-note">Available on Android devices</p>
+        </div>
+    </section>
+
+    <!-- SECTION 4: WHAT IS ILU? -->
+    <section id="what-is-ilu" class="what-is-ilu">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">What is ILU?</h2>
+                <p class="section-subtitle" style="max-width: 800px; margin-bottom: 16px;">ILU — I Listen to You is a digital wellbeing companion designed to give you a gentle space to pause, reflect, and appreciate the little things that often go unnoticed.</p>
+                <p class="section-subtitle" style="max-width: 800px;">Through a simple gratitude-based experience, ILU invites users to recognize three good things from their day and reflect on them.</p>
+                <p class="highlight-phrase">"ILU listens. ILU accompanies. ILU helps you notice the little things."</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card animate-on-scroll">
+                    <div class="info-card-icon">🎧</div>
+                    <h3>Listen</h3>
+                    <p>A space to express what you are feeling.</p>
+                </div>
+                <div class="info-card animate-on-scroll" style="transition-delay: 0.1s">
+                    <div class="info-card-icon">💭</div>
+                    <h3>Reflect</h3>
+                    <p>A moment to pause and understand your experience.</p>
+                </div>
+                <div class="info-card animate-on-scroll" style="transition-delay: 0.2s">
+                    <div class="info-card-icon">✨</div>
+                    <h3>Appreciate</h3>
+                    <p>A simple gratitude practice through Three Good Things.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: WHY ILU EXISTS -->
+    <section class="why-ilu">
+        <div class="container animate-on-scroll">
+            <div class="why-content">
+                <h2 class="section-title">Because not every struggle is visible.</h2>
+                <p class="section-subtitle">Someone can smile, study, talk, laugh, and still be carrying something difficult inside. ILU was created to provide a gentle digital space where users can slow down, reflect, and practice gratitude.</p>
+            </div>
+            
+            <div class="abstract-illustration">
+                <!-- Simple SVG abstract illustration representing support -->
+                <svg viewBox="0 0 200 100" style="width: 100%; max-width: 400px; margin: 40px auto 0;">
+                    <circle cx="100" cy="50" r="40" fill="var(--warm-yellow)" opacity="0.2"/>
+                    <circle cx="80" cy="50" r="30" fill="var(--warm-yellow)" opacity="0.4"/>
+                    <circle cx="100" cy="50" r="20" fill="var(--warm-yellow)"/>
+                    <!-- Small mascot nearby -->
+                    <use href="#sunflower-mascot" x="120" y="30" width="30" height="30" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: THREE GOOD THINGS -->
+    <section id="three-good-things" class="three-good-things">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Three Good Things</h2>
+                <p class="section-subtitle">Small moments can still matter.</p>
+            </div>
+
+            <div class="tgt-demo animate-on-scroll" id="tgt-demo">
+                <div id="tgt-display">
+                    <div class="tgt-card">
+                        <svg class="tgt-icon"><use href="#sunflower-mascot"></use></svg>
+                        <span>01 Something I enjoyed</span>
+                    </div>
+                    <div class="tgt-card">
+                        <svg class="tgt-icon"><use href="#sunflower-mascot"></use></svg>
+                        <span>02 Something I'm grateful for</span>
+                    </div>
+                    <div class="tgt-card">
+                        <svg class="tgt-icon"><use href="#sunflower-mascot"></use></svg>
+                        <span>03 Something that made today a little better</span>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 32px;">
+                        <button class="btn btn-primary" id="btn-start-tgt">Try a tiny reflection 🌻</button>
+                    </div>
+                </div>
+
+                <div class="tgt-input-wrapper" id="tgt-inputs">
+                    <input type="text" class="tgt-input" id="tgt-in-1" placeholder="01 Something I enjoyed...">
+                    <input type="text" class="tgt-input" id="tgt-in-2" placeholder="02 Something I'm grateful for...">
+                    <input type="text" class="tgt-input" id="tgt-in-3" placeholder="03 Something that made today a little better...">
+                    
+                    <button class="btn btn-primary" id="btn-submit-tgt" style="margin-top: 16px;">Save these little things</button>
+                </div>
+
+                <div class="tgt-success" id="tgt-success">
+                    <h3 style="color: var(--text-dark); margin-bottom: 16px;">Look at that. You found three little good things today. 🌻</h3>
+                    <svg class="mascot-float" style="width: 80px; height: 80px; margin: 0 auto;"><use href="#sunflower-mascot"></use></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: MENTAL HEALTH EDUCATION -->
+    <section id="understand" class="understand">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Let's Talk About Mental Health</h2>
+            </div>
+            
+            <div class="accordion animate-on-scroll">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What is mental health?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">Mental health includes our emotional, psychological, and social wellbeing. It affects how we think, feel, and act as we cope with life. It also helps determine how we handle stress, relate to others, and make choices.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What is depression?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">According to the WHO, depression is a common mental disorder. It is more than just a bout of sadness. It involves a persistent low mood and a loss of pleasure or interest in activities, lasting for at least two weeks.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        When should I seek help?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">You should consider seeking help when you experience persistent symptoms that affect your daily life, relationships, or ability to function. Reaching out to a trusted adult or a mental health professional is a courageous first step.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        How can I support someone?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">Listen to them without judgment, be present, and offer a safe space for them to share. Encourage them gently to seek professional support if they are struggling, and remind them that they are not alone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: STATS -->
+    <section class="stats">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">What is happening in Indonesia?</h2>
+                <div style="display: flex; justify-content: center; gap: 40px; margin-top: 24px; color: var(--text-light); font-weight: 500;">
+                    <span>2018 &rarr;</span>
+                    <span>2023 &rarr;</span>
+                    <span style="color: var(--sunflower);">2026</span>
+                </div>
+            </div>
+            
+            <div class="stats-grid" id="stats-container">
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number"><span class="counter" data-target="1.4">0</span>%</div>
+                    <div class="stat-desc">Prevalence of depression in Indonesia</div>
+                    <div class="stat-source">Source: Kementerian Kesehatan RI — Survei Kesehatan Indonesia (SKI) 2023</div>
+                </div>
+                
+                <div class="stat-card animate-on-scroll" style="transition-delay: 0.1s">
+                    <div class="stat-number"><span class="counter" data-target="2">0</span>%</div>
+                    <div class="stat-desc">Prevalence among people aged 15–24 years</div>
+                    <div class="stat-source">Source: SKI 2023</div>
+                </div>
+                
+                <div class="stat-card animate-on-scroll" style="transition-delay: 0.2s">
+                    <div class="stat-number"><span class="counter" data-target="4.8">0</span>%</div>
+                    <div class="stat-desc">Children showing symptoms of depression</div>
+                    <div class="stat-source">Source: Kementerian Kesehatan RI, Free Health Check program, March 2026<br><a href="https://sehatnegeriku.kemkes.go.id" style="color: var(--sunflower); text-decoration: underline;">Learn more</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: HOW IT WORKS -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">How ILU Works</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-icon"><svg><use href="#sunflower-mascot"></use></svg></div>
+                    <div class="timeline-content">
+                        <h4>Step 01: Open ILU</h4>
+                        <p>Start your day with a warm welcome.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-icon"><svg><use href="#sunflower-mascot"></use></svg></div>
+                    <div class="timeline-content">
+                        <h4>Step 02: Check in</h4>
+                        <p>Take a moment to notice how you're feeling.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-icon"><svg><use href="#sunflower-mascot"></use></svg></div>
+                    <div class="timeline-content">
+                        <h4>Step 03: Talk</h4>
+                        <p>Use the conversational space to express your thoughts.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-icon"><svg><use href="#sunflower-mascot"></use></svg></div>
+                    <div class="timeline-content">
+                        <h4>Step 04: Reflect</h4>
+                        <p>Pause and recognize what matters.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-icon"><svg><use href="#sunflower-mascot"></use></svg></div>
+                    <div class="timeline-content">
+                        <h4>Step 05: Three Good Things</h4>
+                        <p>Write three positive moments from your day.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-icon"><svg><use href="#sunflower-mascot"></use></svg></div>
+                    <div class="timeline-content">
+                        <h4>Step 06: Keep going</h4>
+                        <p>Return whenever you need a gentle moment to pause.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: ILU FEATURES -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">What ILU Offers</h2>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Companion</h3>
+                    <p>A conversational space designed to provide supportive interaction.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" style="transition-delay: 0.1s">
+                    <div class="feature-icon">🌻</div>
+                    <h3>Three Good Things</h3>
+                    <p>A simple gratitude practice.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" style="transition-delay: 0.2s">
+                    <div class="feature-icon">📅</div>
+                    <h3>Daily Reflection</h3>
+                    <p>A moment to check in with yourself.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📱</div>
+                    <h3>Home Widget</h3>
+                    <p>A quick reminder and greeting from ILU.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" style="transition-delay: 0.1s">
+                    <div class="feature-icon">💛</div>
+                    <h3>Gratitude Widget</h3>
+                    <p>A quick view of your saved positive moments.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" style="transition-delay: 0.2s">
+                    <div class="feature-icon">☀️</div>
+                    <h3>Warm Sunflower Identity</h3>
+                    <p>A consistent visual companion throughout the experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11: SAFETY NOTICE -->
+    <section class="safety-notice animate-on-scroll">
+        <div class="container">
+            <div class="safety-content">
+                <h3>ILU is here to accompany, not replace professional care.</h3>
+                <p style="margin-bottom: 16px;">ILU is a digital wellbeing companion. It does not diagnose mental health conditions and should not replace professional assessment or treatment.</p>
+                <p>If you are experiencing serious emotional distress or feel unsafe, please reach out to a trusted adult, mental-health professional, or appropriate emergency/crisis service in your area.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: GET TO KNOW ILU (RESOURCES) -->
+    <section id="resources" class="journey">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Get to Know ILU</h2>
+            </div>
+            
+            <div class="journey-flow animate-on-scroll">
+                <div class="journey-item">
+                    <div class="journey-header">
+                        <span>🌻</span> Why we created ILU
+                    </div>
+                    <div class="journey-desc">
+                        We wanted to build a safe, non-judgmental space where people can pause and breathe. ILU was designed recognizing that sometimes the best support is just someone—or something—that listens.
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-header">
+                        <span>💭</span> What happens inside ILU
+                    </div>
+                    <div class="journey-desc">
+                        Inside ILU, you'll find gentle prompts, a listening ear, and a space to record your thoughts. There's no pressure to feel a certain way—just an invitation to be present.
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-header">
+                        <span>✨</span> Why gratitude matters
+                    </div>
+                    <div class="journey-desc">
+                        Practicing gratitude doesn't mean ignoring the hard things. It's about training our minds to also notice the small sparks of light in our day, which can gently shift our perspective over time.
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-header">
+                        <span>📱</span> How the app works
+                    </div>
+                    <div class="journey-desc">
+                        Download ILU, set up your profile, and start engaging with the conversational companion. Try the Three Good Things practice daily to build a habit of positive reflection.
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-header">
+                        <span>💛</span> Start your journey
+                    </div>
+                    <div class="journey-desc">
+                        Are you ready to carve out a little moment for yourself today? Download ILU and let's take that first gentle step together.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13: FAQ -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="accordion animate-on-scroll">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What is ILU?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">ILU stands for I Listen to You. It's a digital wellbeing companion for Android that helps you pause, reflect, and practice daily gratitude.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Is ILU a mental-health diagnosis app?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">No. ILU is not a diagnostic tool. It is designed to support wellbeing and self-reflection, not to assess or treat mental health conditions.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What is Three Good Things?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">Three Good Things is a simple gratitude practice where you identify three positive moments from your day.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Can ILU replace a psychologist?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">No. ILU is a digital companion designed to complement your wellbeing practices. For serious mental health concerns, please consult a qualified professional.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Is ILU free?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">Yes, ILU is free to download and use.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What devices can use ILU?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">ILU is currently available for Android devices.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Where can I download ILU?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">ILU is available on Google Play Store. Tap the Download button on this page.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        How does ILU protect user privacy?
+                        <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="padding-top: 16px;">ILU takes user privacy seriously. Please refer to our Privacy Policy for details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 14: FINAL CTA -->
+    <section class="final-cta">
+        <div class="container animate-on-scroll">
+            <h2>Maybe today, you just need a little space to listen.</h2>
+            <p style="font-size: 1.5rem; margin-bottom: 32px;">Start with ILU.</p>
+            <a href="#download" class="btn">Download ILU</a>
+        </div>
+        <svg class="final-mascot"><use href="#sunflower-mascot"></use></svg>
+    </section>
+
+    <!-- SECTION 15: FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <svg><use href="#sunflower-mascot"></use></svg>
+                        ILU
+                    </div>
+                    <p style="font-weight: 500;">I Listen to You</p>
+                    <p class="hero-note">Your feelings deserve to be heard.</p>
+                </div>
+                <div class="footer-nav">
+                    <a href="#">Home</a>
+                    <a href="#what-is-ilu">About ILU</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#understand">Mental Health</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#download" class="btn btn-primary">Download ILU</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ILU — I Listen to You. All rights reserved.</p>
+                <div style="margin-top: 8px;">
+                    <svg style="width: 20px; height: 20px;"><use href="#sunflower-mascot"></use></svg>
+                    <svg style="width: 20px; height: 20px; margin-left: 8px;"><use href="#sunflower-mascot"></use></svg>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Sticky Navbar
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Mobile Menu
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeMenuBtn = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('open');
+            }
+
+            hamburgerBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // 3. Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 4. Stat Counters (Animate when in view)
+            const statsContainer = document.getElementById('stats-container');
+            let statsAnimated = false;
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !statsAnimated) {
+                    statsAnimated = true;
+                    document.querySelectorAll('.counter').forEach(counter => {
+                        const target = parseFloat(counter.getAttribute('data-target'));
+                        const duration = 2000; // ms
+                        const stepTime = 50;
+                        const steps = duration / stepTime;
+                        const step = target / steps;
+                        let current = 0;
+
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            // format based on if it has decimals
+                            counter.innerText = target % 1 === 0 ? Math.floor(current) : current.toFixed(1);
+                        }, stepTime);
+                    });
+                }
+            }, { threshold: 0.5 });
+
+            if(statsContainer) {
+                statsObserver.observe(statsContainer);
+            }
+
+            // 5. Accordion Logic (FAQ & Mental Health)
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const content = item.querySelector('.accordion-content');
+                    
+                    // Close all others
+                    /* // Optional: if you want only one open at a time
+                    document.querySelectorAll('.accordion-item').forEach(other => {
+                        if (other !== item) {
+                            other.classList.remove('active');
+                            other.querySelector('.accordion-content').style.maxHeight = null;
+                        }
+                    });
+                    */
+                    
+                    item.classList.toggle('active');
+                    if (item.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
+
+            // 6. Journey Expandable Items
+            document.querySelectorAll('.journey-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const desc = this.querySelector('.journey-desc');
+                    this.classList.toggle('open');
+                    
+                    if (this.classList.contains('open')) {
+                        desc.style.maxHeight = desc.scrollHeight + "px";
+                    } else {
+                        desc.style.maxHeight = null;
+                    }
+                });
+            });
+
+            // 7. Three Good Things Demo Logic
+            const btnStartTgt = document.getElementById('btn-start-tgt');
+            const tgtDisplay = document.getElementById('tgt-display');
+            const tgtInputs = document.getElementById('tgt-inputs');
+            const btnSubmitTgt = document.getElementById('btn-submit-tgt');
+            const tgtSuccess = document.getElementById('tgt-success');
+            
+            const inputs = [
+                document.getElementById('tgt-in-1'),
+                document.getElementById('tgt-in-2'),
+                document.getElementById('tgt-in-3')
+            ];
+
+            if(btnStartTgt && tgtDisplay && tgtInputs) {
+                btnStartTgt.addEventListener('click', () => {
+                    tgtDisplay.style.display = 'none';
+                    tgtInputs.style.display = 'flex';
+                    inputs[0].focus();
+                });
+            }
+
+            if(btnSubmitTgt && tgtInputs && tgtSuccess) {
+                btnSubmitTgt.addEventListener('click', () => {
+                    let allFilled = true;
+                    inputs.forEach(input => {
+                        if (input.value.trim() === '') {
+                            allFilled = false;
+                            input.style.borderColor = 'red';
+                            setTimeout(() => input.style.borderColor = 'var(--soft-yellow)', 1000);
+                        }
+                    });
+
+                    if (allFilled) {
+                        tgtInputs.style.display = 'none';
+                        tgtSuccess.style.display = 'block';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
