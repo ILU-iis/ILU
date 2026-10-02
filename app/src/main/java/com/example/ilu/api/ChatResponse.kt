@@ -1,4 +1,4 @@
-package com.example.ilu.api
+package com.iluiis.app.api
 
 data class ChatResponse(
 

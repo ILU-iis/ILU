@@ -7,19 +7,19 @@ plugins {
 
 android {
 
-    namespace = "com.example.ilu"
+    namespace = "com.iluiis.app"
 
     compileSdk = 34
 
     defaultConfig {
 
-        applicationId = "com.example.ilu"
+        applicationId = "com.iluiis.app"
 
         minSdk = 24
         targetSdk = 34
 
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "1.4"
 
     }
 

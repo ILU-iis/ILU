@@ -1,4 +1,4 @@
-package com.example.ilu.database
+package com.iluiis.app.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

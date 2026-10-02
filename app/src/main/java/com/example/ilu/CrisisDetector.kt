@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 object CrisisDetector {
 

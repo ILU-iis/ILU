@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 import android.content.BroadcastReceiver
 import android.content.Context

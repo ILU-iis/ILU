@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore

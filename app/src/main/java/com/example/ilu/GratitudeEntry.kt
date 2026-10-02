@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 data class GratitudeEntry(
     val date: String,

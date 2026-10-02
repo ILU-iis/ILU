@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,11 +13,11 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ilu.api.ChatMessage
-import com.example.ilu.api.OpenRouterRepository
-import com.example.ilu.database.AppDatabase
-import com.example.ilu.database.ChatMessageEntity
-import com.example.ilu.database.GratitudeEntity
+import com.iluiis.app.api.ChatMessage
+import com.iluiis.app.api.OpenRouterRepository
+import com.iluiis.app.database.AppDatabase
+import com.iluiis.app.database.ChatMessageEntity
+import com.iluiis.app.database.GratitudeEntity
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

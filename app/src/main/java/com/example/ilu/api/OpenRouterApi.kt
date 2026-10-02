@@ -1,4 +1,4 @@
-package com.example.ilu.api
+package com.iluiis.app.api
 
 import retrofit2.Response
 import retrofit2.http.Body

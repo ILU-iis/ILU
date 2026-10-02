@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 import org.junit.Test
 import org.junit.Assert.*

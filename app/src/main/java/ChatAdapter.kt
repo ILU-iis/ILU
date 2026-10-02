@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.example.ilu.api
+package com.iluiis.app.api
 
 import com.google.gson.annotations.SerializedName
 
@@ -19,4 +19,4 @@ data class ChatMessage(
 
     @SerializedName("content")
     val content: String
-)
+)

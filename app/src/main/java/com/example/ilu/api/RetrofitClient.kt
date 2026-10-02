@@ -1,4 +1,4 @@
-package com.example.ilu.api
+package com.iluiis.app.api
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

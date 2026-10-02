@@ -1,4 +1,4 @@
-package com.example.ilu.database
+package com.iluiis.app.database
 
 import androidx.room.Dao
 import androidx.room.Insert

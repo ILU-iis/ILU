@@ -1,4 +1,4 @@
-package com.example.ilu
+package com.iluiis.app
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ilu.database.AppDatabase
+import com.iluiis.app.database.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

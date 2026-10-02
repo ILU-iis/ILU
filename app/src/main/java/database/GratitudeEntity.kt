@@ -1,4 +1,4 @@
-package com.example.ilu.database
+package com.iluiis.app.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
