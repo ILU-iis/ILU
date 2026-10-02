@@ -18,12 +18,21 @@ object RetrofitClient {
 
         }
 
+    private val headerInterceptor = okhttp3.Interceptor { chain ->
+        val request = chain.request().newBuilder()
+            .addHeader("HTTP-Referer", "https://ilu-iis.github.io/ILU/")
+            .addHeader("X-Title", "ILU - I Listen to You")
+            .build()
+        chain.proceed(request)
+    }
+
     private val client =
         OkHttpClient.Builder()
-            .connectTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
-            .readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
-            .writeTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
+            .connectTimeout(120, java.util.concurrent.TimeUnit.SECONDS)
+            .readTimeout(120, java.util.concurrent.TimeUnit.SECONDS)
+            .writeTimeout(120, java.util.concurrent.TimeUnit.SECONDS)
             .addInterceptor(logging)
+            .addInterceptor(headerInterceptor)
             .build()
 
     val api: OpenRouterApi by lazy {
