@@ -9,17 +9,17 @@ android {
 
     namespace = "com.iluiis.app"
 
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
 
         applicationId = "com.iluiis.app"
 
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
 
-        versionCode = 5
-        versionName = "1.4"
+        versionCode = 6
+        versionName = "1.5"
 
     }
 
