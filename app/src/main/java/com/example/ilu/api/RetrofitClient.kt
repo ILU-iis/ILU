@@ -20,7 +20,7 @@ object RetrofitClient {
 
     private val headerInterceptor = okhttp3.Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("HTTP-Referer", "https://iluaps.com/")
+            .addHeader("HTTP-Referer", "https://ilu-iis.github.io/ILU/")
             .addHeader("X-Title", "ILU - I Listen to You")
             .build()
         chain.proceed(request)
