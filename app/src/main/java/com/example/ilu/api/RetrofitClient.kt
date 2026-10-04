@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     private const val BASE_URL =
-        "https://openrouter.ai/api/v1/"
+        "https://api.openai.com/v1/"
 
     private val logging =
         HttpLoggingInterceptor().apply {
@@ -20,7 +20,7 @@ object RetrofitClient {
 
     private val headerInterceptor = okhttp3.Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("HTTP-Referer", "https://ilu-iis.github.io/ILU/")
+            .addHeader("HTTP-Referer", "https://iluaps.com/")
             .addHeader("X-Title", "ILU - I Listen to You")
             .build()
         chain.proceed(request)
