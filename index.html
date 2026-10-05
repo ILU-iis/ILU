@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="googleefeaaa1e9da4fd5a" />
     <title>ILU — I Listen to You | Teman Cerita & Pendamping Harimu</title>
-    <meta name="description" content="ILU — I Listen to You adalah aplikasi pendamping harian tempat kamu bisa bebas bercerita, didengarkan tanpa dihakimi, dan menemukan hal-hal baik setiap hari.">
+    <meta name="description" content="ILU — I Listen to You adalah aplikasi teman cerita harian tempat kamu bisa berbagi cerita dengan tenang dan menemukan hal-hal baik setiap hari lewat Tiga Hal Baik.">
     <meta name="keywords" content="ILU, I Listen to You, teman cerita, tempat cerita, aplikasi curhat, tiga hal baik, kesehatan mental, gratitude app">
     <meta property="og:title" content="ILU — I Listen to You">
     <meta property="og:description" content="Tempat aman untuk bercerita, didengarkan dengan hangat, dan merayakan momen-momen kecil harimu.">
@@ -630,10 +630,30 @@
             text-align: center;
             box-shadow: 0 6px 20px rgba(0,0,0,0.02);
             transition: var(--transition);
+            border: 2px solid transparent;
         }
 
         .stat-card:hover {
             transform: translateY(-4px);
+        }
+
+        .stat-card.featured {
+            border: 2px solid var(--sunflower);
+            background-color: #FFFDF4;
+            box-shadow: 0 10px 25px rgba(246, 201, 69, 0.2);
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background-color: var(--sunflower);
+            color: #3F3A2F;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-number {
@@ -1069,12 +1089,12 @@
             <div class="hero-content animate-on-scroll">
                 <h1 class="hero-title">Hai, selamat datang di ILU 🌻</h1>
                 <h2 class="hero-subtitle">Teman cerita harianmu</h2>
-                <p class="hero-desc">Kadang kamu nggak butuh solusi atau nasihat panjang. Kamu cukup butuh satu tempat yang mau dengerin kamu — tanpa dihakimi, tanpa buru-buru.</p>
+                <p class="hero-desc">Ruang hangat untuk berbagi cerita harimu, melepas penat sejenak, dan merawat kebaikan-kebaikan kecil lewat Tiga Hal Baik setiap hari.</p>
                 <div class="hero-actions">
-                    <a href="#download" class="btn btn-primary">Kenalan sama ILU yuk 🌻</a>
-                    <a href="#what-is-ilu" class="btn btn-outline">Ceritain dulu dong, ILU itu apa?</a>
+                    <a href="#download" class="btn btn-primary">Mulai Cerita Bareng ILU 🌻</a>
+                    <a href="#what-is-ilu" class="btn btn-outline">Kenali ILU Lebih Dekat</a>
                 </div>
-                <p class="hero-note">Cerita dan perasaanmu layak didengarkan. Selalu.</p>
+                <p class="hero-note">Setiap cerita dan perasaanmu layak didengarkan dengan hangat.</p>
             </div>
             <div class="hero-visual animate-on-scroll" style="transition-delay: 0.2s">
                 <svg class="hero-mascot mascot-float"><use href="#sunflower-mascot"></use></svg>
@@ -1252,7 +1272,7 @@
                         <svg class="accordion-icon" width="24" height="24"><use href="#icon-plus"></use></svg>
                     </button>
                     <div class="accordion-content">
-                        <p style="padding-top: 16px;">Dengarkan ceritanya tanpa terburu-buru menghakimi atau mengguruinya. Cukup hadir dan ingatkan bahwa ia tidak sendirian.</p>
+                        <p style="padding-top: 16px;">Dengarkan ceritanya dengan tulus dan penuh perhatian. Cukup hadir mendampingi dan ingatkan bahwa ia tidak sendirian.</p>
                     </div>
                 </div>
             </div>
@@ -1264,30 +1284,44 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title">Apa yang Terjadi di Indonesia?</h2>
-                <div style="display: flex; justify-content: center; gap: 40px; margin-top: 24px; color: var(--text-light); font-weight: 500;">
-                    <span>2018 &rarr;</span>
-                    <span>2023 &rarr;</span>
-                    <span style="color: var(--sunflower);">2026</span>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 24px; font-weight: 600; flex-wrap: wrap;">
+                    <span style="background: var(--soft-yellow); color: #8A6400; padding: 6px 18px; border-radius: 50px; border: 1px solid var(--sunflower);">🌟 2026: Skrining Nasional</span>
+                    <span style="color: var(--text-light);">&larr;</span>
+                    <span style="background: #F8F7F2; color: var(--text-secondary); padding: 6px 16px; border-radius: 50px; border: 1px solid #EBE9DF;">2023: Survei SKI</span>
+                    <span style="color: var(--text-light);">&larr;</span>
+                    <span style="background: #F8F7F2; color: var(--text-secondary); padding: 6px 16px; border-radius: 50px; border: 1px solid #EBE9DF;">2018: Riskesdas</span>
                 </div>
             </div>
             
             <div class="stats-grid" id="stats-container">
-                <div class="stat-card animate-on-scroll">
-                    <div class="stat-number"><span class="counter" data-target="1.4">0</span>%</div>
-                    <div class="stat-desc">Prevalensi depresi di Indonesia</div>
-                    <div class="stat-source">Sumber: Kementerian Kesehatan RI — Survei Kesehatan Indonesia (SKI) 2023</div>
+                <div class="stat-card featured animate-on-scroll">
+                    <span class="stat-badge">Temuan Terbaru 2026</span>
+                    <div class="stat-number"><span class="counter" data-target="4.8">0</span>%</div>
+                    <div class="stat-desc">Anak & Remaja Terindikasi Gejala Depresi</div>
+                    <div class="stat-source">
+                        Hasil skrining kesehatan jiwa massal Kemenkes RI terhadap ~7 juta anak & remaja (2026).<br>
+                        <a href="https://sehatnegeriku.kemkes.go.id" target="_blank" style="color: #D97706; text-decoration: underline; font-weight: 600; display: inline-block; margin-top: 8px;">Rilis Resmi Kemenkes RI &rarr;</a>
+                    </div>
                 </div>
                 
                 <div class="stat-card animate-on-scroll" style="transition-delay: 0.1s">
-                    <div class="stat-number"><span class="counter" data-target="2">0</span>%</div>
-                    <div class="stat-desc">Prevalensi pada usia 15–24 tahun</div>
-                    <div class="stat-source">Sumber: SKI 2023</div>
+                    <span class="stat-badge" style="background:#E2E8F0; color:#475569;">Survei SKI 2023</span>
+                    <div class="stat-number"><span class="counter" data-target="2.0">0</span>%</div>
+                    <div class="stat-desc">Prevalensi Depresi Usia 15–24 Tahun</div>
+                    <div class="stat-source">
+                        Survei Kesehatan Indonesia (SKI) 2023 oleh Kementerian Kesehatan RI pada kelompok remaja.<br>
+                        <a href="https://badankebijakan.kemkes.go.id" target="_blank" style="color: var(--text-secondary); text-decoration: underline; display: inline-block; margin-top: 8px;">Laporan Badan Kebijakan Kemenkes</a>
+                    </div>
                 </div>
                 
                 <div class="stat-card animate-on-scroll" style="transition-delay: 0.2s">
-                    <div class="stat-number"><span class="counter" data-target="4.8">0</span>%</div>
-                    <div class="stat-desc">Anak menunjukkan gejala emosional</div>
-                    <div class="stat-source">Sumber: Kementerian Kesehatan RI, Program Skrining 2026<br><a href="https://sehatnegeriku.kemkes.go.id" target="_blank" style="color: var(--sunflower); text-decoration: underline;">Pelajari selengkapnya</a></div>
+                    <span class="stat-badge" style="background:#E2E8F0; color:#475569;">Riskesdas 2018</span>
+                    <div class="stat-number"><span class="counter" data-target="6.1">0</span>%</div>
+                    <div class="stat-desc">Prevalensi Depresi Penduduk Usia 15+ Tahun</div>
+                    <div class="stat-source">
+                        Riset Kesehatan Dasar (Riskesdas) 2018 oleh Badan Litbangkes Kemenkes RI.<br>
+                        <a href="https://www.kemkes.go.id" target="_blank" style="color: var(--text-secondary); text-decoration: underline; display: inline-block; margin-top: 8px;">Publikasi Resmi Riskesdas 2018</a>
+                    </div>
                 </div>
             </div>
         </div>
