@@ -40,7 +40,8 @@
         <activity android:name=".RecapActivity" />
         <activity android:name=".GuideActivity" />
         <activity android:name=".NameActivity" />
-        <activity android:name=".ChatActivity" />
+        <activity android:name=".ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".IntroActivity" android:exported="false" />
         <activity
             android:name=".SplashActivity"

@@ -7,9 +7,12 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +44,15 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        // Fix keyboard covering input bar on modern Android (API 30+)
+        val rootLayout = findViewById<LinearLayout>(R.id.rootChatLayout)
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { view, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.setPadding(0, 0, 0, maxOf(imeInsets.bottom, navInsets.bottom))
+            insets
+        }
 
         sharedPreferences = getSharedPreferences("ILU", MODE_PRIVATE)
         database = AppDatabase.getDatabase(this)
@@ -232,17 +244,12 @@ class ChatActivity : AppCompatActivity() {
 Ini adalah awal percakapan hari ini. Nama pengguna: ${username ?: "Teman"}.
 $gratitudeStatus
 WAJIB DIPATUHI UNTUK SAPAAN PEMBUKA:
-1. Mulailah dengan sapaan hangat dan ramah seperti sahabat karib. DILARANG menggunakan kata "lagi" (karena ini adalah percakapan pertama kali), dan DILARANG menggunakan emoji matahari (🌻) pada sapaan awal ini.
-2. Tanyakan kabar atau bagaimana keadaan/perasaan mereka hari ini dengan gaya yang sangat santai, luwes, tidak kaku, dan mengalir natural.
-3. DILARANG menggunakan template kalimat yang sama terus-menerus. AI harus kreatif dan membuat variasi kalimat sapaan yang berbeda setiap harinya.
-   - Contoh variasi yang santai dan natural (tanpa kata 'lagi' & tanpa emoji matahari):
-     - "Hai ${username ?: "Teman"}, seneng akhirnya bisa ngobrol sama kamu. Hari ini berjalan gimana buat kamu? Ada yang seru nggak?"
-     - "Halo ${username ?: "Teman"}, salam kenal ya. Gimana kabarmu hari ini? Ada yang pengen kamu ceritain?"
-     - "Hai ${username ?: "Teman"}, selamat datang. Gimana keadaanmu hari ini? Santai aja, kalau ada yang mau dibagi, aku siap dengerin."
-     - "Halo ${username ?: "Teman"}, seneng bisa kenal kamu. Gimana perasaanmu hari ini? Ada cerita menarik kah hari ini?"
-4. Buat pengguna merasa nyaman, aman, diterima, dan hangat.
-5. Gunakan Bahasa Indonesia santai sehari-hari yang alami (contoh: aku, kamu, nggak, gimana, aja, banget).
-6. DILARANG KERAS menggunakan sapaan robotik atau kaku.
+1. Sapa nama pengguna secara hangat, santai, dan lembut seperti sahabat dekat. DILARANG menggunakan kata "lagi" dan DILARANG menggunakan emoji matahari (🌻) pada sapaan awal ini.
+2. TANYAKAN DUA HAL UTAMA SECARA MENGALIR:
+   - Bagaimana perasaannya hari ini?
+   - Apakah ada hal yang ingin diceritakan?
+   (Contoh variasi natural: "Halo ${username ?: "Teman"}! Gimana perasaanmu hari ini? Ada yang mau kamu ceritain ke aku?", "Hai ${username ?: "Teman"}, senang bisa ngobrol sama kamu. Gimana keadaan atau perasaanmu hari ini? Ada cerita yang pengen kamu bagi?")
+3. Gunakan Bahasa Indonesia santai yang lembut, alami, dan tidak kaku.
 """.trimIndent()
 
             val reply = withContext(Dispatchers.IO) {
