@@ -240,16 +240,48 @@ class ChatActivity : AppCompatActivity() {
             else
                 "Pengguna BELUM mengisi gratitude hari ini. Jika obrolan berlangsung santai dan harinya terasa baik, SEGERA tanyakan 3 hal baik yang dirasakan hari ini (tanyakan lebih awal setelah 3-5 pesan mengalir, jangan menunda-nunda)."
 
+            val currentHour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+            val timeContext = when (currentHour) {
+                in 4..10 -> "Waktu saat ini: Pagi hari (bisa gunakan sapaan pagi yang segar jika cocok)"
+                in 11..14 -> "Waktu saat ini: Siang hari (bisa sentuh rehat sejenak di sela kegiatan)"
+                in 15..18 -> "Waktu saat ini: Sore hari (bisa sentuh melepas penat setelah seharian)"
+                else -> "Waktu saat ini: Malam hari (bisa sentuh suasana tenang menjelang istirahat)"
+            }
+
+            val greetingThemes = listOf(
+                "Sudut pandang: Sahabat yang selalu ada. Buka dengan sapaan akrab santai, sampaikan senang bisa ngobrol lagi, tanyakan kabar perasaan dan apakah ada yang ingin diceritakan.",
+                "Sudut pandang: Rehat dan napas sejenak. Ajak dia berhenti sejenak dari kesibukan, tanyakan bagaimana rasanya hari ini berjalan dan apa yang dirasakan hatinya, serta tawarkan telinga jika ada cerita.",
+                "Sudut pandang: Ruang aman tanpa tuntutan. Ingatkan dengan santai bahwa apapun yang dia rasakan hari ini selalu valid, tanyakan perasaannya saat ini dan apakah ada unek-unek yang ingin dia curahkan.",
+                "Sudut pandang: Teman ngobrol yang peduli. Buka dengan ceria tapi lembut, tanyakan bagaimana suasana hatinya hari ini, dan tanyakan apakah ada hal menarik atau justru hal berat yang pengen dibagi.",
+                "Sudut pandang: Pendengar setia. Tanyakan apakah harinya berjalan lancar atau melelahkan, bagaimana perasaan batinnya sekarang, dan beri ruang seluas-luasnya untuk dia mulai cerita.",
+                "Sudut pandang: Kata-kata penenang. Buka dengan lembut, tanyakan apa kabar hatinya hari ini, dan katakan kamu selalu siap mendengarkan cerita apa pun yang ada di kepalanya.",
+                "Sudut pandang: Melepas beban pikiran. Tanyakan apakah ada hal yang mengganjal atau menyenangkan yang dia alami, bagaimana perasaannya saat ini, dan ajak dia meluapkannya dengan santai.",
+                "Sudut pandang: Santai dan bersahabat. Sapa dengan akrab, tanyakan bagaimana kondisinya hari ini, dan tanyakan apa cerita yang lagi pengen diobrolin bareng kamu.",
+                "Sudut pandang: Menemani hari. Tanyakan apakah harinya terasa sepi atau ramai, bagaimana perasaannya menghadapi hari ini, dan apakah ada yang ingin dia ceritakan.",
+                "Sudut pandang: Empati tulus. Tanyakan kabar dan perasaan jujurnya hari ini tanpa perlu pura-pura baik-baik saja, dan tawarkan apakah ada hal yang ingin dibagikan ke kamu.",
+                "Sudut pandang: Mengawali obrolan santai. Buka dengan hangat, tanyakan bagaimana harinya sejauh ini, apa yang paling terasa di hatinya, dan tanyakan apakah ada cerita yang mau dibagi.",
+                "Sudut pandang: Tempat pulang yang nyaman. Katakan kamu senang dia mampir, tanyakan bagaimana kabar suasana hatinya hari ini, dan siap menyimak cerita apa pun."
+            )
+            val selectedTheme = greetingThemes.random()
+
             val openingPrompt = """
-Ini adalah awal percakapan hari ini. Nama pengguna: ${username ?: "Teman"}.
+Ini adalah sapaan awal untuk membuka percakapan hari ini dengan ${username ?: "Teman"}.
 $gratitudeStatus
-WAJIB DIPATUHI UNTUK SAPAAN PEMBUKA:
-1. Sapa nama pengguna secara hangat, santai, dan lembut seperti sahabat dekat. DILARANG menggunakan kata "lagi" dan DILARANG menggunakan emoji matahari (🌻) pada sapaan awal ini.
-2. TANYAKAN DUA HAL UTAMA SECARA MENGALIR:
-   - Bagaimana perasaannya hari ini?
-   - Apakah ada hal yang ingin diceritakan?
-   (Contoh variasi natural: "Halo ${username ?: "Teman"}! Gimana perasaanmu hari ini? Ada yang mau kamu ceritain ke aku?", "Hai ${username ?: "Teman"}, senang bisa ngobrol sama kamu. Gimana keadaan atau perasaanmu hari ini? Ada cerita yang pengen kamu bagi?")
-3. Gunakan Bahasa Indonesia santai yang lembut, alami, dan tidak kaku.
+$timeContext
+
+PANDUAN VARIASI SAPAAN (PENTING AGAR TIDAK TEMPLATE & TIDAK MONOTON):
+1. INTI WAJIB:
+   - Tanyakan kabar dan bagaimana perasaannya hari ini secara tulus.
+   - Tanyakan apakah ada hal yang ingin dia ceritakan atau bagi ke kamu.
+2. TEMA & SUASANA KHUSUS HARI INI:
+   $selectedTheme
+3. KATA-KATA TAMBAHAN:
+   Jangan hanya terpaku pada kalimat tanya pendek. Sisipkan 1-2 kalimat pengantar atau penutup hangat khas sahabat yang alami (misalnya ungkapan senang bisa nemenin, apresiasi sudah bertahan, atau ajakan santai untuk rehat).
+4. ATURAN GAYA BAHASA:
+   - DILARANG menggunakan kata "lagi" secara berulang.
+   - DILARANG menggunakan emoji matahari (🌻).
+   - Gunakan Bahasa Indonesia santai sehari-hari yang luwes dan lembut khas anak muda/sahabat dekat ('Halo ${username ?: "Teman"}', 'Hai ${username ?: "Teman"}', 'aku', 'kamu', 'gimana', 'nggak', 'gapapa'). JANGAN baku/kaku seperti 'Selamat pagi, Bagaimana kabar Anda'.
+   - Buat dalam 2 hingga 4 kalimat yang padu, bernyawa, dan nyaman dibaca.
 """.trimIndent()
 
             val reply = withContext(Dispatchers.IO) {
